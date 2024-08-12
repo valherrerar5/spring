@@ -14,14 +14,13 @@ import com.practica.practica.service.EstudianteService;
 
 import jakarta.transaction.Transactional;
 
-
 @Service
 @Transactional
 public class EstudianteServiceImp implements EstudianteService {
 
     private final EstudianteRepository estudianteRepository;
 
-    public EstudianteServiceImp(EstudianteRepository estudianteRepository){
+    public EstudianteServiceImp(EstudianteRepository estudianteRepository) {
         this.estudianteRepository = estudianteRepository;
     }
 
@@ -49,7 +48,6 @@ public class EstudianteServiceImp implements EstudianteService {
 
             notaOriginal.setNombre(estudiante.getNombre());
             notaOriginal.setApellido(estudiante.getApellido());
-            
 
             return this.estudianteRepository.save(notaOriginal);
         }
@@ -69,12 +67,19 @@ public class EstudianteServiceImp implements EstudianteService {
         return this.estudianteRepository.save(estudiante);
     }
 
-    // @Override
-    // public List<Curso> getCursosByEstudiante(Long estudianteId) {
-    //     Estudiante estudiante = estudianteRepository.findById(estudianteId).orElseThrow(() -> new RuntimeException("Curso no encontrado"));
+    @Override
+    public List<Curso> getCursosByEstudiante(Long estudianteId) {
+        Optional<Estudiante> estudianteOp = estudianteRepository.findById(estudianteId);
+            
+        if(estudianteOp.isPresent()){
 
-    //     return estudiante.getMatriculas().stream()
-    //             .map(Matricula::getCurso)
-    //             .collect(Collectors.toList());
-    // }
+            Estudiante estudiante = estudianteOp.get();
+            
+            return estudiante.getMatriculas().stream()
+                .map(Matricula::getCurso)
+                .collect(Collectors.toList());
+        }    
+
+        return null;
+    }
 }

@@ -43,8 +43,8 @@ public class Estudiante {
     @JsonBackReference
     private List<Matricula> matriculas; // Relación con Matricula
 
-    @Override
-    public String toString() {
-        return "Estudiante{id=" + id + ", nombre='" + nombre + "', apellido='" + apellido + "'}";
-    }
+     @Override
+     public String toString() {
+         return "Estudiante{id=" + id + ", nombre='" + nombre + "', apellido='" + apellido + "'}";
+     }
 }

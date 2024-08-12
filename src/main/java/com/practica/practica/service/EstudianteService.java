@@ -21,5 +21,5 @@ public interface EstudianteService {
 
     public Estudiante save(Estudiante estudiante);
 
-    //public List<Curso> getCursosByEstudiante(Long estudianteId);
+    public List<Curso> getCursosByEstudiante(Long estudianteId);
 }

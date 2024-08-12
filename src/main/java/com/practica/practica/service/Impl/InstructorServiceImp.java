@@ -60,7 +60,6 @@ public class InstructorServiceImp implements InstructorService {
 
     @Override
     public void deleteByID(Long id) {
-        System.out.println("id --------------------" + id);
         if (this.instructorRepository.existsById(id)) {
             this.instructorRepository.deleteById(id);
         }

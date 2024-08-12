@@ -76,10 +76,10 @@ public class CursoController {
     public String cursoDetalle(@PathVariable("cursoId") Long cursoId, Model model) {
         System.out.println("lega");
         Curso curso = cursoService.findById(cursoId);
-      //  List<Estudiante> estudiantes = this.cursoService.getEstudiantesByCurso(cursoId);
+        List<Estudiante> estudiantes = this.cursoService.getEstudiantesByCurso(cursoId);
 
         model.addAttribute("curso", curso);
-       // model.addAttribute("estudiantes", estudiantes);
+        model.addAttribute("estudiantes", estudiantes);
 
         return "cursoTemplate/detalle";
     }

@@ -47,10 +47,10 @@ public class EstudianteController {
     public String editarEstudiante(@PathVariable("estudianteId") Long estudianteId, Model model) {
 
         Estudiante estudiante = this.estudianteService.findById(estudianteId);
-       // List<Curso> cursos = this.estudianteService.getCursosByEstudiante(estudianteId);
+        List<Curso> cursos = this.estudianteService.getCursosByEstudiante(estudianteId);
         
         model.addAttribute("estudiante", estudiante);
-        //model.addAttribute("cursos", cursos);
+        model.addAttribute("cursos", cursos);
 
         return "estudianteTemplate/edit";
     }

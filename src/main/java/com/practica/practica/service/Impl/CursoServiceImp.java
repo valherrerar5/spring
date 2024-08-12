@@ -71,14 +71,21 @@ public class CursoServiceImp implements CursoService {
         return notaNueva;
     }
 
-    // @Override
-    // public List<Estudiante> getEstudiantesByCurso(Long cursoId) {
-    //     Curso curso = cursoRepository.findById(cursoId).orElseThrow(() -> new RuntimeException("Curso no encontrado"));
+    @Override
+    public List<Estudiante> getEstudiantesByCurso(Long cursoId) {
+        
+        Optional<Curso> cursoOp = cursoRepository.findById(cursoId);
 
-    //     return curso.getMatriculas().stream()
-    //             .map(Matricula::getEstudiante)
-    //             .collect(Collectors.toList());
-    // }
+        if (cursoOp.isPresent()) {
+            Curso curso = cursoOp.get();
+
+            return curso.getMatriculas().stream()
+                    .map(Matricula::getEstudiante)
+                    .collect(Collectors.toList());
+        }
+
+        return null;
+    }
 
     @Override
     public List<Curso> getCursosByIntructor(Instructor intructor) {

@@ -46,12 +46,12 @@ public class Curso {
     @Column(name = "CREDITOS")
     private Long creditos;
 
-    // @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY, orphanRemoval = false)
-    // @JsonManagedReference
-    // private List<Matricula> matriculas; // Relación con Matricula
+    @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY, orphanRemoval = false)
+    @JsonManagedReference
+    private List<Matricula> matriculas; // Relación con Matricula
 
-    @Override
-    public String toString() {
-         return "Curso{id=" + id + ", nombre='" + nombre + "', creditos=" + creditos + "}";
-    }
+     @Override
+     public String toString() {
+          return "Curso{id=" + id + ", nombre='" + nombre + "', creditos=" + creditos + "}";
+     }
 }

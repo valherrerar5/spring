@@ -41,7 +41,7 @@ public class Matricula {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CURSO")
-    //@JsonBackReference
+    @JsonBackReference
     private Curso curso;
 
     @Column(name = "FECHA")

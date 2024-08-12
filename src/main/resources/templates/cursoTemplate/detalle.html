@@ -57,7 +57,7 @@
                     <label for="cursoInstructor" class="col-sm-2 col-form-label">Instructor</label>
                     <div class="col-sm-10">
                         <input type="text" readonly class="form-control-plaintext" id="cursoInstructor"
-                            th:value="${instructor != null ? instructor.nombre + ' ' + instructor.apellido : 'Instructor no disponible'}">
+                            th:value="${curso.instructor != null ? curso.instructor.nombre + ' ' + curso.instructor.apellido : 'Instructor no disponible'}">
                             
                     </div>
                 </div>
@@ -67,6 +67,7 @@
 
             <div class="barra-container">
                 <h1>Estudiantes</h1>
+                <a class="btn btn-primary" th:href="@{/matricula/{cursoId}(cursoId=${curso.id})}"><i class="fas fa-plus"></i> Matricular estudiante</a>
             </div>
             <table class="table table-striped">
                 <thead>

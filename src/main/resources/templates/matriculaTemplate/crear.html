@@ -10,9 +10,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
-        .formulario {
-            padding: 2rem;
-            padding-left: 0rem;
+        .table td,
+        .table th {
+            text-align: center;
+        }
+
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+        }
+
+        .table th,
+        .table td {
+            width: 20%;
+            /* Ajusta el porcentaje según el número de columnas */
+        }
+
+        .barra-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
         }
     </style>
 
@@ -21,7 +41,6 @@
 </head>
 
 <body>
-
     <div>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -41,36 +60,51 @@
             </div>
         </nav>
     </div>
+
     <div class="container mt-5">
-        <h2 th:text="'Información del estudiante: ' + ${estudiante.id}"></h2>
+        <h2>Sistema de Matrícula</h2>
         <div class="container formulario">
-            <form role="form" method="post" th:action="@{/estudiante/editarEstudiante/{estudianteId}(estudianteId=${estudiante.id})}" th:object="${estudiante}">
-                <!-- Campo de texto solo lectura id -->
+            <form role="form" method="post" th:action="@{/matricula/{cursoId}(cursoId=${curso.id})}" th:object="${matricula}">
+        
                 <div class="mb-3 row">
-                    <label for="nombreEstudiante" class="col-sm-2 col-form-label">Nombre</label>
+                    <label for="identificacionCurso" class="col-sm-2 col-form-label">Identificación</label>
                     <div class="col-sm-10">
                         <input type="hidden" th:field="*{id}" />
-                        <input type="text" class="form-control" id="nombreEstudiante"
-                            placeholder="Ingrese el nombre: " th:field="*{nombre}">
-                            <div th:if="${#fields.hasErrors('nombre')}" class="text-danger">
-                                <p th:errors="*{nombre}">Nombre Error</p>
-                            </div>
+                        <input type="text" readonly class="form-control-plaintext" id="identificacionCurso" th:value="${curso.id}">
                     </div>
                 </div>
     
-                <!-- Campo de nombre -->
+             
                 <div class="mb-3 row">
-                    <label for="apellidoEstudiante" class="col-sm-2 col-form-label">Apellido</label>
+                    <label for="nombreCurso" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="apellidoEstudiante"
-                            placeholder="Ingrese el apellido: " th:field="*{apellido}">
-                            <div th:if="${#fields.hasErrors('apellido')}" class="text-danger">
-                                <p th:errors="*{apellido}">Apellido Error</p>
-                            </div>
+                        <input type="text" readonly class="form-control-plaintext" id="nombreCurso" th:value="${curso.nombre}">
                     </div>
                 </div>
     
-                <!-- Botón de envío -->
+          
+                <div class="mb-3 row">
+                    <label for="cursoInstructor" class="col-sm-2 col-form-label">Instructor</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="cursoInstructor" th:value="${curso.instructor != null ? curso.instructor.nombre + ' ' + curso.instructor.apellido : 'Instructor no disponible'}">
+                    </div>
+                </div>
+    
+         
+                <div class="mb-3 row">
+                    <label for="estudiantesDisponibles" class="col-sm-2 col-form-label">Estudiantes</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="inputSelect" th:field="*{estudiante}">
+                          
+                            <option th:each="estudiante : ${estudiantes}" 
+                                    th:value="${estudiante.id}"
+                                    th:text="${estudiante.nombre + ' ' + estudiante.apellido}">
+                            </option>
+                        </select>
+                    </div>
+                </div>        <!-- -->
+    
+ 
                 <div class="mb-3 row">
                     <div class="col-sm-10 offset-sm-2">
                         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -78,30 +112,6 @@
                 </div>
             </form>
         </div>
-
-        <div class="barra-container">
-            <h1>Cursos</h1>
-        </div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="curso : ${cursos}">
-                    <td th:text="${curso.id}"></td>
-                    <td th:text="${curso.nombre}"></td>
-                    <td>
-                         <a class="btn btn-danger" th:href="@{/estudiante/eliminar/{cursoId}/estudiante/{estudianteId}(cursoId=${curso.id}, estudianteId=${estudiante.id})}"><i
-                                    class="far fa-trash-alt"></i></a>  
-                    </td> 
-                </tr>
-            </tbody>
-        </table>
-
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

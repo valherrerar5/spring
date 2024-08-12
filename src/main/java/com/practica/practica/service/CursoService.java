@@ -21,7 +21,7 @@ public interface CursoService {
 
     public Curso save(Curso curso);
 
-    //public List<Estudiante> getEstudiantesByCurso(Long cursoId);
+    public List<Estudiante> getEstudiantesByCurso(Long cursoId);
 
     public List<Curso> getCursosByIntructor(Instructor intructor);
 

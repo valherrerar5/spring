@@ -82,4 +82,16 @@ public class EstudianteServiceImp implements EstudianteService {
 
         return null;
     }
+
+    @Override
+    public List<Matricula> obtenerMatriculasPorEstudiante(Long estudianteId) {
+        Optional<Estudiante> estudianteOp = estudianteRepository.findById(estudianteId);
+
+        if(estudianteOp.isPresent()){
+            Estudiante estudiante = estudianteOp.get();   
+            return estudiante.getMatriculas();
+        }
+
+        return null;
+    }
 }

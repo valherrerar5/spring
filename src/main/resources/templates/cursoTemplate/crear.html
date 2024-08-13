@@ -52,6 +52,10 @@
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="nombreCurso"
                             placeholder="Ingrese el nombre del curso" th:field="*{nombre}">
+                            <div th:if="${#fields.hasErrors('nombre')}" class="text-danger">
+                                <p th:errors="*{nombre}">Nombre Error</p>
+                            </div>
+                            
                     </div>
                 </div>
     
@@ -61,6 +65,9 @@
                     <div class="col-sm-10">
                         <input type="number" class="form-control" id="cursoCreditos"
                             placeholder="Ingrese la cantidad de créditos" th:field="*{creditos}">
+                            <div th:if="${#fields.hasErrors('creditos')}" class="text-danger">
+                                <p th:errors="*{creditos}">Creditos Error</p>
+                            </div>
                     </div>
                 </div>
     

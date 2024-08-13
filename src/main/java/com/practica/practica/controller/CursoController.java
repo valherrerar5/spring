@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
 
 import com.practica.practica.domain.Curso;
 import com.practica.practica.domain.Estudiante;
@@ -43,7 +44,6 @@ public class CursoController {
         List<Curso> cursos = this.cursoService.findAll();
 
         model.addAttribute("cursos", cursos);
-        System.out.println("---------------------------->" +cursos);
 
         return "cursoTemplate/listar";
 
@@ -63,6 +63,7 @@ public class CursoController {
 
     @GetMapping("/crear/")
     public String crearCurso(Model model) {
+        System.out.println("LLega");
         Curso curso = new Curso();
         List<Instructor> instructores = instructorService.findAll();
 
@@ -74,7 +75,6 @@ public class CursoController {
 
     @GetMapping("/detalle/{cursoId}")
     public String cursoDetalle(@PathVariable("cursoId") Long cursoId, Model model) {
-        System.out.println("lega");
         Curso curso = cursoService.findById(cursoId);
         List<Estudiante> estudiantes = this.cursoService.getEstudiantesByCurso(cursoId);
 
@@ -88,12 +88,25 @@ public class CursoController {
 
     @GetMapping("/eliminar/{cursoId}")
     public String borrarCurso(@PathVariable("cursoId") Long cursoId) {
+
+        List<Matricula> matriculas = this.cursoService.obtenerMatriculasPorCurso(cursoId);
+
+        for (Matricula matricula : matriculas) {
+            this.matriculaService.deleteByID(matricula.getId());
+        }
+    
         this.cursoService.deleteByID(cursoId);
         return "redirect:/curso/";
     }
 
     @PostMapping("/editarCurso/{cursoId}")
-    public String actualizarCurso(@PathVariable("cursoId") Long cursoId, @Valid @ModelAttribute("curso") Curso curso, Model model) {
+    public String actualizarCurso(@PathVariable("cursoId") Long cursoId, @Valid @ModelAttribute("curso") Curso curso, BindingResult bindingResult, Model model) {
+
+        
+        if (bindingResult.hasErrors()) {
+          
+            return "cursoTemplate/edit";
+        }
 
         if (curso.getId().equals(cursoId)){
             this.cursoService.update(curso);
@@ -103,7 +116,13 @@ public class CursoController {
     }
 
     @PostMapping("/crearCurso/")
-    public String crearCurso(@Valid @ModelAttribute("curso") Curso curso, Model model) {
+    public String crearCurso(@Valid @ModelAttribute("curso") Curso curso, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+
+            return "cursoTemplate/crear";
+        }
+
         Curso cursoNuevo = this.cursoService.save(curso);
         return "redirect:/curso/editar/" + cursoNuevo.getId();
     }

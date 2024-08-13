@@ -20,6 +20,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import jakarta.validation.constraints.NotNull;
+
 @Entity
 @Table(name = "TB_MATRICULA")
 @Data

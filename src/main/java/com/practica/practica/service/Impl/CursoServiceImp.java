@@ -89,7 +89,18 @@ public class CursoServiceImp implements CursoService {
 
     @Override
     public List<Curso> getCursosByIntructor(Instructor intructor) {
-
         return (List<Curso>) this.cursoRepository.findByInstructor(intructor);
+    }
+
+    @Override
+    public List<Matricula> obtenerMatriculasPorCurso(Long cursoId) {
+        Optional<Curso> cursoOp = cursoRepository.findById(cursoId);
+
+        if(cursoOp.isPresent()){
+            Curso curso = cursoOp.get();   
+            return curso.getMatriculas();
+        }
+
+        return null;
     }
 }

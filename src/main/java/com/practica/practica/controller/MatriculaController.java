@@ -17,7 +17,6 @@ import com.practica.practica.domain.Estudiante;
 import com.practica.practica.domain.Matricula;
 import com.practica.practica.service.CursoService;
 import com.practica.practica.service.EstudianteService;
-import com.practica.practica.service.InstructorService;
 import com.practica.practica.service.MatriculaService;
 
 import jakarta.validation.Valid;
@@ -54,17 +53,16 @@ public class MatriculaController {
     }
 
     // -----------------------------------------------------------------------------------
+    
     @PostMapping("/{cursoId}")
     public String actualizarCurso(@PathVariable("cursoId") Long cursoId, @Valid @ModelAttribute("matricula") Matricula matricula, Model model) {
 
         Curso curso = this.cursoService.findById(cursoId);
 
-        System.out.println("--> c" +curso);
-        System.out.println("--> m" +matricula);
-
         matricula.setCurso(curso);
         Date fecha = new Date();
         matricula.setFecha(fecha);
+
         this.matriculaService.save(matricula);
 
         return "redirect:/curso/detalle/" + curso.getId();

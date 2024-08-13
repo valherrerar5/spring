@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.practica.practica.domain.Curso;
 import com.practica.practica.domain.Estudiante;
 import com.practica.practica.domain.Instructor;
+import com.practica.practica.domain.Matricula;
 
 @Service
 public interface CursoService {
@@ -24,5 +25,7 @@ public interface CursoService {
     public List<Estudiante> getEstudiantesByCurso(Long cursoId);
 
     public List<Curso> getCursosByIntructor(Instructor intructor);
+
+    public List<Matricula> obtenerMatriculasPorCurso(Long cursoId);
 
 }

@@ -62,7 +62,17 @@ public class InstructoresController {
     // -------------------------------------------
 
     @GetMapping("/eliminar/{instructorId}")
-    public String borrarCurso(@PathVariable("instructorId") Long instructorId) {
+    public String borrarInstructor(@PathVariable("instructorId") Long instructorId) {
+
+        Instructor instructor = this.instructorService.findById(instructorId);
+
+        List<Curso> cursos = this.cursoService.getCursosByIntructor(instructor);
+
+          for (Curso curso : cursos) {
+            curso.setInstructor(null);
+            this.cursoService.save(curso);
+        }
+
         this.instructorService.deleteByID(instructorId);
         return "redirect:/instructor/";
     }

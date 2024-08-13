@@ -18,21 +18,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Instructor {
+public class Instructor  extends BaseEntity{
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_TB_INSTRUCTOR")
     @SequenceGenerator(name = "SQ_TB_INSTRUCTOR", sequenceName = "SQ_TB_INSTRUCTOR", allocationSize = 1)
     @Column(name = "ID")
     private Long id;
-
-    @Column(name = "NOMBRE")
-    private String nombre;
-
-    @Column(name = "APELLIDO")
-    private String apellido;
-
-    // @OneToMany(mappedBy = "instructor", fetch = FetchType.EAGER, orphanRemoval = true)
-    // @JsonBackReference
-    // private List<Curso> cursos; 
 }

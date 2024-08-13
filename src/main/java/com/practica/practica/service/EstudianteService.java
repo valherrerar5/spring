@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.practica.practica.domain.Curso;
 import com.practica.practica.domain.Estudiante;
+import com.practica.practica.domain.Matricula;
 
 
 @Service
@@ -22,4 +23,6 @@ public interface EstudianteService {
     public Estudiante save(Estudiante estudiante);
 
     public List<Curso> getCursosByEstudiante(Long estudianteId);
+
+    public List<Matricula> obtenerMatriculasPorEstudiante(Long estudianteId);
 }

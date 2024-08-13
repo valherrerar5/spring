@@ -67,6 +67,13 @@ public class EstudianteController {
 
     @GetMapping("/eliminar/{estudianteId}")
     public String borrarEstudiante(@PathVariable("estudianteId") Long estudianteId) {
+
+        List<Matricula> matriculas = this.estudianteService.obtenerMatriculasPorEstudiante(estudianteId);
+
+        for (Matricula matricula : matriculas) {
+            this.matriculaService.deleteByID(matricula.getId());
+        }
+
         this.estudianteService.deleteByID(estudianteId);
         return "redirect:/estudiante/";
     }

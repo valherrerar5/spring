@@ -91,11 +91,6 @@ public class CursoRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // @GetMapping("/{cursoId}/estudiantes")
-    // public List<Estudiante> getEstudiantesByCurso(@PathVariable Long cursoId) {
-    //     return cursoService.getEstudiantesByCurso(cursoId);
-    // }
-
     @GetMapping("/{instructorId}/cursos")
     public List<Curso> getCursosByIntructor(@PathVariable Long instructorId) {
         Instructor instructor = this.instructorService.findById(instructorId);

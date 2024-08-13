@@ -87,8 +87,4 @@ public class EstudianteRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // @GetMapping("/{estudianteId}/cursos")
-    // public List<Curso> getEstudiantesByCurso(@PathVariable Long estudianteId) {
-    //     return estudianteService.getCursosByEstudiante(estudianteId);
-    // }
 }

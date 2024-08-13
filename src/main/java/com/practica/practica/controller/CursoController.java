@@ -63,7 +63,6 @@ public class CursoController {
 
     @GetMapping("/crear/")
     public String crearCurso(Model model) {
-        System.out.println("LLega");
         Curso curso = new Curso();
         List<Instructor> instructores = instructorService.findAll();
 

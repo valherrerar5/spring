@@ -45,6 +45,7 @@ public class Curso {
     @Column(name = "NOMBRE")
     private String nombre;
 
+    //Relacion con instructor
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "INSTRUCTOR")
     private Instructor instructor;
@@ -55,6 +56,7 @@ public class Curso {
     @Column(name = "CREDITOS")
     private Long creditos;
 
+    //La matrículas de un curso
     @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY, orphanRemoval = false)
     @JsonManagedReference
     private List<Matricula> matriculas;

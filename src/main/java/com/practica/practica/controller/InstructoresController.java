@@ -68,6 +68,7 @@ public class InstructoresController {
 
         List<Curso> cursos = this.cursoService.getCursosByIntructor(instructor);
 
+        //Si elimino un instructor debo quitar la relacion de los cursos
           for (Curso curso : cursos) {
             curso.setInstructor(null);
             this.cursoService.save(curso);
@@ -84,7 +85,6 @@ public class InstructoresController {
             Model model) {
 
         if (bindingResult.hasErrors()) {
-            // Si hay errores, vuelve a mostrar el formulario con los errores
             return "instructorTemplate/edit";
         }
 
@@ -101,7 +101,6 @@ public class InstructoresController {
             Model model) {
 
         if (bindingResult.hasErrors()) {
-            // Si hay errores, vuelve a mostrar el formulario con los errores
             return "instructorTemplate/crear";
         }
 
@@ -115,10 +114,9 @@ public class InstructoresController {
 
         Curso curso = this.cursoService.findById(cursoId);
 
+        //Si elimina el instructor de un curso debo eliminar la relacion con curso 
         curso.setInstructor(null); 
         this.cursoService.save(curso); 
-        
-       // this.instructorService.deleteByID(instructorId);
     
         return "redirect:/instructor/editar/" + instructorId;
     }

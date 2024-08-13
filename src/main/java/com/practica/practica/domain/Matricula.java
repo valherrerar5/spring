@@ -35,11 +35,13 @@ public class Matricula {
     @Column(name = "ID")
     private Long id;
 
+    //Relación con un estudiante
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ESTUDIANTE")
     @JsonManagedReference
     private Estudiante estudiante; 
 
+    //Relacion con un curso
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CURSO")
     @JsonBackReference

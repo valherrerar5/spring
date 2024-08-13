@@ -66,19 +66,21 @@ public class CursoServiceImp implements CursoService {
     @Override
     public Curso save(Curso curso) {
 
-        Curso notaNueva = this.cursoRepository.save(curso);
+        Curso cursoNuevo = this.cursoRepository.save(curso);
 
-        return notaNueva;
+        return cursoNuevo;
     }
 
     @Override
     public List<Estudiante> getEstudiantesByCurso(Long cursoId) {
         
+        //Obtiene los cursos
         Optional<Curso> cursoOp = cursoRepository.findById(cursoId);
 
         if (cursoOp.isPresent()) {
             Curso curso = cursoOp.get();
 
+            //Obtiene las matriculas porqué curso tiene matriculas
             return curso.getMatriculas().stream()
                     .map(Matricula::getEstudiante)
                     .collect(Collectors.toList());
@@ -89,15 +91,20 @@ public class CursoServiceImp implements CursoService {
 
     @Override
     public List<Curso> getCursosByIntructor(Instructor intructor) {
+        //el curso tiene instructor entonces puedo buscar que cursos tienen a 1 instructor 
         return (List<Curso>) this.cursoRepository.findByInstructor(intructor);
     }
 
     @Override
     public List<Matricula> obtenerMatriculasPorCurso(Long cursoId) {
+
+        //Obtiene el curso
         Optional<Curso> cursoOp = cursoRepository.findById(cursoId);
 
         if(cursoOp.isPresent()){
             Curso curso = cursoOp.get();   
+
+            //Retorna las matriculas porque tiene el valor de matriculas 
             return curso.getMatriculas();
         }
 

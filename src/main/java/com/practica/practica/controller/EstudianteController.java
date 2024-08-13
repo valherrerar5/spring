@@ -36,11 +36,12 @@ public class EstudianteController {
 
     @GetMapping("/")
     public String mostrarEstudaintes(Model model) {
+
         List<Estudiante> estudiantes = this.estudianteService.findAll();
 
         model.addAttribute("estudiantes", estudiantes);
+        
         return "estudianteTemplate/listar";
-
     }
 
     @GetMapping("/editar/{estudianteId}")
@@ -70,6 +71,7 @@ public class EstudianteController {
 
         List<Matricula> matriculas = this.estudianteService.obtenerMatriculasPorEstudiante(estudianteId);
 
+        //Si elimina un estudiante debe borrar todas las matrículas asociadas.
         for (Matricula matricula : matriculas) {
             this.matriculaService.deleteByID(matricula.getId());
         }
@@ -84,7 +86,6 @@ public class EstudianteController {
             BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            // Si hay errores, vuelve a mostrar el formulario con los errores
             return "estudianteTemplate/edit";
         }
 
@@ -100,7 +101,6 @@ public class EstudianteController {
             BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            // Si hay errores, vuelve a mostrar el formulario con los errores
             return "estudianteTemplate/crear";
         }
 

@@ -32,6 +32,7 @@ public class Estudiante extends BaseEntity {
     @Column(name = "ID")
     private Long id;
 
+    //La matrículas de un estudiante
     @OneToMany(mappedBy = "estudiante", fetch = FetchType.LAZY, orphanRemoval = false)
     @JsonBackReference
     private List<Matricula> matriculas; 

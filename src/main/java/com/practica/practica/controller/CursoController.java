@@ -51,6 +51,7 @@ public class CursoController {
 
     @GetMapping("/editar/{cursoId}")
     public String editarCurso(@PathVariable("cursoId") Long cursoId, Model model) {
+
         Curso curso = cursoService.findById(cursoId);
 
         List<Instructor> instructores = instructorService.findAll();
@@ -63,6 +64,7 @@ public class CursoController {
 
     @GetMapping("/crear/")
     public String crearCurso(Model model) {
+
         Curso curso = new Curso();
         List<Instructor> instructores = instructorService.findAll();
 
@@ -74,6 +76,7 @@ public class CursoController {
 
     @GetMapping("/detalle/{cursoId}")
     public String cursoDetalle(@PathVariable("cursoId") Long cursoId, Model model) {
+
         Curso curso = cursoService.findById(cursoId);
         List<Estudiante> estudiantes = this.cursoService.getEstudiantesByCurso(cursoId);
 
@@ -90,6 +93,7 @@ public class CursoController {
 
         List<Matricula> matriculas = this.cursoService.obtenerMatriculasPorCurso(cursoId);
 
+        //Debe eliminar todas las mátriculas relacionadas al curso
         for (Matricula matricula : matriculas) {
             this.matriculaService.deleteByID(matricula.getId());
         }
@@ -101,7 +105,6 @@ public class CursoController {
     @PostMapping("/editarCurso/{cursoId}")
     public String actualizarCurso(@PathVariable("cursoId") Long cursoId, @Valid @ModelAttribute("curso") Curso curso, BindingResult bindingResult, Model model) {
 
-        
         if (bindingResult.hasErrors()) {
           
             return "cursoTemplate/edit";
@@ -133,6 +136,7 @@ public class CursoController {
         Curso curso = this.cursoService.findById(cursoId);
         Matricula matricula = this.matriculaService.findByCursoAndEstudiante(curso, estudiante);
 
+        //Si borra un estudiante de un curso debe borrar la matrícula
         this.matriculaService.deleteByID(matricula.getId());
 
         return "redirect:/curso/detalle/" + cursoId;

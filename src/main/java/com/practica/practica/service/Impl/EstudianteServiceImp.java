@@ -69,12 +69,17 @@ public class EstudianteServiceImp implements EstudianteService {
 
     @Override
     public List<Curso> getCursosByEstudiante(Long estudianteId) {
+        //obtiene el estudiante
         Optional<Estudiante> estudianteOp = estudianteRepository.findById(estudianteId);
             
         if(estudianteOp.isPresent()){
 
             Estudiante estudiante = estudianteOp.get();
             
+            //retorna cursos porqué un estudiante tiene matriculas y las matriculas tienen los curso
+            // 1 primero obtiene el estudiante
+            // 2 despues obtiene las matriculas de ese estudiante
+            // 3 devuelve los cursos de esas matriculas 
             return estudiante.getMatriculas().stream()
                 .map(Matricula::getCurso)
                 .collect(Collectors.toList());
@@ -85,10 +90,13 @@ public class EstudianteServiceImp implements EstudianteService {
 
     @Override
     public List<Matricula> obtenerMatriculasPorEstudiante(Long estudianteId) {
+        //obtiene el estudiante
         Optional<Estudiante> estudianteOp = estudianteRepository.findById(estudianteId);
 
         if(estudianteOp.isPresent()){
             Estudiante estudiante = estudianteOp.get();   
+
+            //Retorna matricula porqué estudiante tiene matriculas
             return estudiante.getMatriculas();
         }
 

@@ -46,7 +46,7 @@
         <div class="container formulario">
             <form role="form" method="post" th:action="@{/instructor/editarInstructor/{instructorId}(instructorId=${instructor.id})}" th:object="${instructor}">
                 
-                <!-- Campo de texto solo lectura id -->
+                <!-- Campo de nombre -->
                 <div class="mb-3 row">
                     <label for="nombreInstructor" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
     
-                <!-- Campo de nombre -->
+                <!-- Campo de apellido -->
                 <div class="mb-3 row">
                     <label for="apellidoInstructor" class="col-sm-2 col-form-label">Apellido</label>
                     <div class="col-sm-10">

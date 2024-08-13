@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.practica.practica.domain.Curso;
-import com.practica.practica.domain.Estudiante;
 import com.practica.practica.domain.Instructor;
 import com.practica.practica.service.CursoService;
 import com.practica.practica.service.InstructorService;

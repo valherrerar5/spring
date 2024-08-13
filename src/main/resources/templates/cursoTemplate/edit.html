@@ -48,6 +48,7 @@
                 <div class="mb-3 row">
                     <label for="identificacionCurso" class="col-sm-2 col-form-label">Identificación</label>
                     <div class="col-sm-10">
+                        <!-- Si el id no llega debo ponerlo hidden -->
                         <input type="hidden" th:field="*{id}" />
                         <input type="text" readonly class="form-control-plaintext" id="identificacionCurso" th:value="${curso.id}">
                     </div>

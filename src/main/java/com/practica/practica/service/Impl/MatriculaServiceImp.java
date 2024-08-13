@@ -77,6 +77,8 @@ public class MatriculaServiceImp implements MatriculaService {
 
     @Override
     public Matricula findByCursoAndEstudiante(Curso curso, Estudiante estudiante) {
+
+        //matricula tiene estudiante y curso 
         return this.matriculaRepository.findByCursoAndEstudiante(curso, estudiante);
     }
 }
